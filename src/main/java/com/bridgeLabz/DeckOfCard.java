@@ -3,6 +3,7 @@ package com.bridgeLabz;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class DeckOfCard {
 	private static String[] suit = { "Spades", "Hearts", "Diamond", "Clubs" };
@@ -15,7 +16,7 @@ public class DeckOfCard {
 	/**
 	 * initializing the deck of card
 	 */
-	public void gameSetUp() {
+	public void setUpDeckOfCard() {
 		int i = 0;
 		for (String s : deckOfCards[0]) {
 			for (String value : deckOfCards[1]) {
@@ -28,7 +29,7 @@ public class DeckOfCard {
 	 * adding players to the game
 	 */
 	public void addPlayer(int numberOfPlayers) {
-		if (numberOfPlayers >= 4) {
+		if (numberOfPlayers > 4) {
 			System.out.println("Maximum of 4 players is allowed");
 		} else {
 			for (int i = 0; i < numberOfPlayers; i++) {
@@ -45,6 +46,27 @@ public class DeckOfCard {
 		}
 	}
 
+	/**
+	 * This method shuffles the deck of cards
+	 * 
+	 * @param deckOfCards
+	 */
+	public void shuffleDeckOfCards() {
+		Random rand = new Random();
+		for (int i = 0; i < deckOfCards.length; i++) {
+			String[] tempArray = deckOfCards[i];
+			for (int j = 0; j < tempArray.length; j++) {
+				// Random for remaining positions.
+				int r = j + rand.nextInt(tempArray.length - j);
+				// swapping the elements
+				String temp = tempArray[r];
+				tempArray[r] = tempArray[j];
+				tempArray[j] = temp;
+			}
+			deckOfCards[i] = tempArray;
+		}
+	}
+	
 	/**
 	 * printing the deck of card
 	 */
