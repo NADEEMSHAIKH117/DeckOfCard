@@ -10,17 +10,12 @@ public class DeckOfCard {
 	private static String[][] deckOfCards = { suit, rank };
 	private static Card[] deck = new Card[52];
 	private static List<Player> playerList = new ArrayList<Player>();
-
-	public static void main(String[] args) {
-		DeckOfCard deckOfCard = new DeckOfCard();
-		deckOfCard.gameSetUp();
-		deckOfCard.addPlayer(2);
-	}
+	private static Scanner sc = new Scanner(System.in);
 
 	/**
 	 * initializing the deck of card
 	 */
-	private void gameSetUp() {
+	public void gameSetUp() {
 		int i = 0;
 		for (String s : deckOfCards[0]) {
 			for (String value : deckOfCards[1]) {
@@ -32,34 +27,42 @@ public class DeckOfCard {
 	/**
 	 * adding players to the game
 	 */
-	private void addPlayer(int numberOfPlayers) {
+	public void addPlayer(int numberOfPlayers) {
 		if (numberOfPlayers >= 4) {
 			System.out.println("Maximum of 4 players is allowed");
 		} else {
-			Scanner sc = new Scanner(System.in);
 			for (int i = 0; i < numberOfPlayers; i++) {
 				System.out.println("Enter first name");
 				String fn = sc.nextLine();
 				System.out.println("Enter second name");
 				String ln = sc.nextLine();
-				Player player = new Player(ln, fn);
-				player.setFirstname(fn);
-				player.setLastName(ln);
+				Player player = new Player(fn, ln);
 				playerList.add(player);
 				for (int j = 0; j < playerList.size(); j++) {
 					System.out.println(playerList.get(j));
 				}
 			}
-			sc.close();
 		}
 	}
 
 	/**
 	 * printing the deck of card
 	 */
-	private void printDeck() {
+	public void printDeck() {
 		for (int i = 0; i < deck.length; i++) {
 			System.out.println(deck[i]);
+		}
+	}
+
+	/**
+	 * To sequence the Players order and how they should receive the cards and
+	 * further order for play
+	 */
+	public void orderPlayerTurn(int numberOfPlayers) {
+		System.out.println("Enter players order");
+		for (int i = 0; i < numberOfPlayers; i++) {
+			int turn = sc.nextInt();
+			playerList.get(i).setPlayerTurn(turn);
 		}
 	}
 }
